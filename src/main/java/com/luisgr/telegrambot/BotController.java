@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.GetUpdates;
@@ -29,12 +30,12 @@ public class BotController {
 		GetUpdatesResponse getUpdatesResponse = bot.execute(getUpdates);
 
 		List<Update> updates = getUpdatesResponse.updates();
-//		updates.forEach(this::webhook);
+		updates.forEach(handler::handleUpdate);
 	}
 
 	@RequestMapping(value = "/webhook", method = RequestMethod.POST)
-	public void webhook(@RequestBody String update) {
-		System.out.println(update);
-//		handler.handleUpdate(update);
+	public void webhook(@RequestBody String updateJson) {
+		Update update = BotUtils.parseUpdate(updateJson);
+		handler.handleUpdate(update);
 	}
 }

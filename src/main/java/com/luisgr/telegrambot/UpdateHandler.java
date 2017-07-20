@@ -21,7 +21,6 @@ public class UpdateHandler{
 	public void handleUpdate(Update update) {
 		Message message = update.message();
 
-		System.out.println(message);
 		Long chatId = message.chat().id();
 		String text = message.text();
 
