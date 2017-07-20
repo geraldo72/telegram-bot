@@ -34,6 +34,7 @@ public class BotController {
 
 	@RequestMapping(value = "/webhook", method = RequestMethod.POST)
 	public void webhook(@RequestBody Update update) {
+		System.out.println(update);
 		handler.handleUpdate(update);
 	}
 }
