@@ -29,12 +29,12 @@ public class BotController {
 		GetUpdatesResponse getUpdatesResponse = bot.execute(getUpdates);
 
 		List<Update> updates = getUpdatesResponse.updates();
-		updates.forEach(this::webhook);
+//		updates.forEach(this::webhook);
 	}
 
 	@RequestMapping(value = "/webhook", method = RequestMethod.POST)
-	public void webhook(@RequestBody Update update) {
+	public void webhook(@RequestBody String update) {
 		System.out.println(update);
-		handler.handleUpdate(update);
+//		handler.handleUpdate(update);
 	}
 }
